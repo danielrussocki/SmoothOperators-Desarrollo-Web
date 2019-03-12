@@ -60,6 +60,7 @@
                  <input type="file" id="foto" name="foto"  accept="image/x-png,image/gif,image/jpeg">
                 <input type="hidden" name="ruta" id="ruta" readonly="readonly">
               </div>
+              <div id="preview"></div>
               </div>
               <div class="col">
                 <div class="form-group">
