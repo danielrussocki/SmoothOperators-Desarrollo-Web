@@ -234,14 +234,12 @@ function consultar_slider(){
 
 function consultar_test($id){
 	global $mysqli;
-	$consulta = "SELECT * FROM slider WHERE id_slider = $id  LIMIT 1";
+	$consulta = "SELECT * FROM slider WHERE id_slider = $id LIMIT 1";
 	$resultado = mysqli_query($mysqli, $consulta);
-	$arreglo = [];
-	while($fila = mysqli_fetch_array($resultado)){
-		array_push($arreglo, $fila);
-	}
-	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+	$fila = mysqli_fetch_array($resultado);
+	echo json_encode($fila); 
 }
+
 
 function insertar_slider(){
 	global $mysqli;
