@@ -81,9 +81,28 @@ switch ($_POST["accion"]) {
 
 		case 'update_shareIcons':
 		update_shareIcons();
-		break;		
+		break;
 
-	default:
+		case "insertar_team":
+  		insertar_team();
+  		break;
+
+  		case "eliminar_team":
+  		eliminar_team($_POST["id"]);
+		break;
+
+		case 'editar_team':
+    	editar_team($registro= $_POST["id"]);
+		break;
+
+  		case 'consultar_miembro':
+    	consultar_miembro($registro= $_POST["id"]);		
+		default;
+
+		case "consultar_team":
+  		consultar_team();
+
+  break;
 			
 	break;
 }
@@ -348,6 +367,70 @@ global $db;
  		echo"0";
 	}
  }
+
+
+ function consultar_team(){
+  global $mysqli;
+  $consulta = "SELECT * FROM team";
+  $resultado = mysqli_query($mysqli, $consulta);
+  $arreglo = [];
+  while($fila = mysqli_fetch_array($resultado)){
+    array_push($arreglo, $fila);
+  }
+  echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+}
+
+
+function consultar_miembro($id){
+  global $mysqli;
+  $consulta = "SELECT * FROM team WHERE team_id = $id";
+  $resultado = mysqli_query($mysqli, $consulta);
+  $fila = mysqli_fetch_array($resultado);
+  echo json_encode($fila); //Imprime el JSON ENCODEADO
+}
+
+function insertar_team(){
+  global $mysqli;
+  $team_img = $_POST["imagen"];
+  $team_name = $_POST["nombre"]; 
+  $team_position = $_POST["cargo"];
+  $team_description = $_POST["descripcion"];
+  $consulta = "INSERT INTO team VALUES('','$team_img','$team_name','$team_position','$team_description')";
+  $resultado = mysqli_query($mysqli, $consulta);
+    if ($resultado) {
+    echo "Se agrego correctamente";
+  } else {
+    echo "Se generó un error, intenta nuevamente";
+  }
+
+}
+
+
+function editar_team($id){
+  global $mysqli;
+  extract($_POST);
+  $consulta = "UPDATE team SET team_img = '$imagen', team_name = '$nombre', 
+  team_position = '$cargo', team_description = '$descripcion' WHERE team_id = '$id' ";
+  $resultado = mysqli_query($mysqli, $consulta);
+  if($resultado){
+    echo "Se editó correctamente";
+  }else{
+    echo "Se generó un error, intentalo nuevamente";
+  }
+}
+
+
+
+function eliminar_team($id){
+  global $mysqli;
+  $query = "DELETE FROM team WHERE team_id = $id";
+  $resultado = mysqli_query($mysqli, $query);
+  if ($resultado) {
+    echo "Se eliminó correctamente";
+  } else {
+    echo "Se generó un error, intenta nuevamente";
+  }
+}
 
   
 ?>

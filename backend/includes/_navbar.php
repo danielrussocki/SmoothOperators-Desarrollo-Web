@@ -43,4 +43,10 @@
               
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="team.php">
+              Team<span class="sr-only"></span>
+            </a>
+          </li>
       </nav>
