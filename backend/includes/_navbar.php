@@ -45,8 +45,10 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="team.php">
-              Team<span class="sr-only"></span>
-            </a>
-          </li>
+              <a class="nav-link" href="team.php">
+               Team <span data-feather="shopping-cart"></span>
+                
+              </a>
+            </li>
+             </li>
       </nav>
