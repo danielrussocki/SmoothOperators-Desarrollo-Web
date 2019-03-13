@@ -5,7 +5,7 @@
   if (isset($varsesion)){
   ?>
 
-<!Doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -15,14 +15,14 @@
   <meta name="generator" content="Jekyll v3.8.5">
   <title>Dashboard Template · Bootstrap</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="css/estilos.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/estilo.css" rel="stylesheet">
 </head>
 <body>
-   
-    <?php 
+  <?php 
     include("includes/_navbar.php");
    ?>
-  
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Team</h1>
