@@ -42,7 +42,7 @@
         <div class="alert alert-success" id="infoSH" style="display: none;"></div>
         <div class="btn-toolbar mb-2 mb-md-0">
               <div class= "btn-group mr-2">  
-                         <form action="" enctype="form-data" id="form_data">               
+          <form action="#" id="form_data" enctype="multipart/form-data">          
                 <button type="button" class="btn btn-sm btn-outline-success" id="guardar_datos" ">Guardar</button>
           </div>
         </div>
@@ -50,25 +50,32 @@
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="tituloDownload">Title</label>
-                  <input type="text" id="tituloDownload" name="tituloDownload" class="form-control" ></input>
+                  <label for="titleDownload">Title</label>
+                  <input type="text" id="titleDownload" name="titleDownload" class="form-control" ></input>
                 </div>
                 <div class="form-group">
                   <label for="contentDownload">Content</label>
                   <input type="text" id="contentDownload" name="contentDownload" class="form-control" ></input>
                 </div>
+                <label for="filedownload">Upload File:</label>
+                <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="custom-file-label" id="inputGroupFileAddon01">Upload</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="filedownload" name="filedownload" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+            </div>
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label for="contentDownload">Button Text</label>
-                  <input type="text" id="contentDownload" name="contentDownload" class="form-control" ></input>
+                  <label for="buttonDownload">Button Text</label>
+                  <input type="text" id="buttonDownload" name="contentDownload" class="form-control" ></input>
                 </div>
                   </div>
             </div>
-                 <div class="form-group">
-                  <label for="linkHeader">Link</label>
-                 
-                </div>
+                  <input type="hidden" name="linkdownload" id="linkdownload" readonly="readonly">
           </form>
         </div>
                 </main>
@@ -78,18 +85,17 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
 <script>
 
-$(function updateHeader(){
+$(function updateDownload(){
   $("#guardar_datos").click(function(){
-   let titulo = $("#tituloHeader").val();
-   let texto = $("#textoHeader").val();
-   let boton = $("#botonHeader").val();
-   let link = $("#linkHeader").val();
+   let titulo = $("#titleDownload").val();
+   let texto = $("#contentDownload").val();
+   let boton = $("#buttonDownload").val();
+   let link = $("#linkDownload").val();
    let obj ={
-    "accion" : "update_header",
+    "accion" : "update_download",
     "titulo" : titulo,
     "texto" : texto,
     "boton" : boton,
-    "link" : link
    }
 
    $("#form_data").find("input").each(function(r){
@@ -107,7 +113,7 @@ $(function updateHeader(){
 
     if (i == "1") {
        $("#infoSH").html("Actualizado Correctamente").show().delay(2000).fadeOut(400);
-       consultarHeader();
+       consultarDownload();
 
      } else {
        $("#infoDH").html("Error al Actualizar").show().delay(2000).fadeOut(400);
@@ -119,18 +125,17 @@ $(function updateHeader(){
    });
    });
 
-$(function consultarHeader(){
+$(function consultarDownload(){
 
     let obj = {
-      "accion" : "consultar_header"
+      "accion" : "consultar_download"
     };
 
     $.post('includes/_funciones.php', obj, function(r){
 
-    $("#tituloHeader").val(r.title_header);
-    $("#textoHeader").val(r.content_header);
-    $("#botonHeader").val(r.link_header);
-    $("#linkHeader").val(r.href_header);
+    $("#titleDownload").val(r.title_download);
+    $("#contentDownload").val(r.content_download);
+    $("#buttonDownload").val(r.button_download);
     }, "JSON");
 
    });

@@ -63,6 +63,10 @@ switch ($_POST["accion"]) {
 		consultar_footer();
 		break;
 
+		case 'consultar_download':
+		consultar_download();
+		break;
+
 		case 'consultar_shareFooter':
 		consultar_shareFooter();
 		break;
@@ -73,6 +77,10 @@ switch ($_POST["accion"]) {
 
 		case 'update_header':
 		update_header();
+		break;
+
+		case 'update_download':
+		update_download();
 		break;
 
 		case 'update_footer':
@@ -240,7 +248,7 @@ function insertar_slider(){
 	$img_slider = $_POST["ruta"];
 	$quote_slider = $_POST["texto"];	
 	$name_slider = $_POST["nombre"];
-	$consulta = "INSERT INTO slider VALUES('','$img_slider','$quote_slider','$name_slider', '4', '1')";
+	$consulta = "INSERT INTO slider VALUES('','$img_slider','$quote_slider','$name_slider')";
 	$resultado = mysqli_query($mysqli, $consulta);
 	$array = [];
 	while($fila1 = mysqli_fetch_array($resultado)){
@@ -283,10 +291,19 @@ function editar_slider($id){
 
  }
 
-
  function consultar_footer(){
  	global $db;
  	$query = "SELECT * FROM smoothop_segundo_parcial.footer";
+	$stmt = $db->prepare($query);
+	$stmt->execute();
+	$fila = $stmt->fetch(PDO::FETCH_ASSOC);
+	echo json_encode($fila);
+
+ }
+
+  function consultar_download(){
+ 	global $db;
+ 	$query = "SELECT * FROM smoothop_segundo_parcial.download";
 	$stmt = $db->prepare($query);
 	$stmt->execute();
 	$fila = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -305,8 +322,7 @@ function editar_slider($id){
 	array_push($array, $temp);
 				}
 			echo json_encode($array);
-
-	  }
+  }
 
 function consultar_iconsFooter(){
  	global $db;
@@ -336,6 +352,23 @@ $link = $_POST["link"];
  		echo"0";
  	}
  }
+
+function update_download(){
+$titulo= $_POST["titulo"];
+$texto= $_POST["texto"];
+$boton = $_POST["boton"];
+
+ 	global $db;
+ 	$stmt = $db->prepare("UPDATE smoothop_segundo_parcial.download SET title_download =?, content_download =?, button_download =? WHERE id_download = 1");
+ 	$stmt->execute(array($titulo, $texto, $boton));
+ 	$affected_rows = $stmt->rowCount();
+ 	if ($affected_rows > 0) {
+ 		echo "1";
+ 	} else {
+ 		echo"0";
+ 	}
+ }
+
 
 function update_footer(){
 $location= $_POST["location"];
